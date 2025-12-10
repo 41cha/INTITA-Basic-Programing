@@ -58,7 +58,7 @@ class DynamicArray:
         
         self.data[index] = value
 
-    def lenght_val(self):
+    def length_val(self):
         return self.length
 
     def print_all(self):
@@ -70,24 +70,31 @@ class DynamicArray:
 
     def unused(self):
         return self.capacity - self.length
+    
+    def unused_persent(self):
+        return round((self.capacity - self.length) / self.capacity * 100, 3)
 
 
 arr = DynamicArray(8, "dynamic")
 
-for i in range(20):
+for i in range(25):
     arr.append(i)
 
 arr.print_all() 
 
-print("length:", arr.lenght_val())
+print("length:", arr.length_val())
 
 print("item:", arr.get(3))
 
-arr.set(3, 99) 
+arr.set(3, 99)
+ 
+print(arr.get(3))
 
 print("resize count:", arr.resize_count)
 
 print("unused:", arr.unused())
+
+print(f"unused persent: {arr.unused_persent()} %")
 
 
 
