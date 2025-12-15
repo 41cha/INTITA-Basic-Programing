@@ -1,8 +1,5 @@
 import ctypes
 import math
-import time
-import matplotlib.pyplot as plt
-import numpy as np
 
 class DynamicArray:
     def __init__(self, start_capacity=8, growth_type="double"):
@@ -74,37 +71,73 @@ class DynamicArray:
     def unused(self):
         return self.capacity - self.length
 
-growth_types = ["double", "fixed", "dynamic"]
-sizes = [100, 1000, 10000, 25000, 50000, 75000, 100000]
-results = {gt: [] for gt in growth_types}
 
-for growth_type in growth_types:
-    times = []
+arr = DynamicArray(8, "dynamic")
 
-    for num in sizes:
-        arr = DynamicArray(8, growth_type=growth_type)
-        t0 = time.time()
+for i in range(20):
+    arr.append(i)
 
-        for i in range(num):
-            arr.append(i)
+arr.print_all() 
 
-        t1 = time.time()
-        times.append((t1 - t0) * 1000)  # в мілісекунди
-        print(f"{growth_type}: {num} елементів - {times[-1]:.2f} мс")
+print("length:", arr.lenght_val())
 
-    results[growth_type] = times
+print("item:", arr.get(3))
 
-plt.figure(figsize=(10, 6))
-for growth_type in growth_types:
-    plt.plot(sizes, results[growth_type], marker='o', label=growth_type, linewidth=2)
+arr.set(3, 99) 
 
-plt.xlabel('Кількість елементів')
-plt.ylabel('Час додавання (мс)')
-plt.title('Порівняння швидкості DynamicArray для різних growth_type')
-plt.legend()
+print("resize count:", arr.resize_count)
 
-plt.grid(True, alpha=0.3)
-plt.yscale('log') 
-plt.xticks(sizes)
-plt.tight_layout()
-plt.show()
+print("unused:", arr.unused())
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import ctypes
+# import math
+
+# class DynamicArray:
+#     def __init__(self, initial_capacity=8, growth_factor=2):
+#         self.capacity = initial_capacity
+#         self.growth_factor = growth_factor
+#         self.data = (self.capacity * ctypes.py_object)()
+#         self.lenght = 0
+
+#     def append(self, item):
+#         if self.growth_factor == "log2":
+#             new_capacity = int(self.capacity * math.log2(self.capacity))
+
+#         else:
+#             new_capacity = int(self.capacity * float(self.growth_factor))
+
+#         new_data = (new_capacity * ctypes.py_object)()
+
+#         for i in range(self.lenght):
+#             new_data[i] = self.data[i]
+
+#         self.data = new_data
+#         self.capacity = new_capacity
+
+#     def get(self, index):
+#         if self.lenght <= index:
+#             raise IndexError(f'index {index} out of range')
+#         return self.data[index]
+
+
+# import time
+# sizes = [1, 10, 100, 1000, 10000, 100000, 1000000]
+# for num in sizes:
+#     arr = DynamicArray(8, log2)
+#     t0 = time.time()
+#     for i in range(num):
+#         arr.append(i)
+#     t1 = time.time()
+#     print(f"Added {num} items in {t1-t0} seconds")
