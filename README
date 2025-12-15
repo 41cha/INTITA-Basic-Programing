@@ -20,8 +20,8 @@ Dynamic стратегія найбільш економна по пам’ят�
 Додавання елементів масштабується добре при великих стартових capacity та агресивному growth factor, але це шкодить ефективності використання пам’яті.
 
 
-<img src="images/Figure_for_cap8.png" alt="start_capacity = 8" width="300">
+<img src="https://github.com/41cha/INTITA-Basic-Programing/blob/main/images/Figure_for_cap8.png?raw=true" alt="start_capacity = 8" width="300">
 
-<img src="images/Figure_for_cap32.png" alt="start_capacity = 32" width="300">
+<img src="https://github.com/41cha/INTITA-Basic-Programing/blob/main/images/Figure_for_cap32.png?raw=true" alt="start_capacity = 32" width="300">
 
-<img src="images/Figure_for_cap128.png" alt="start_capacity = 128" width="300">
+<img src="https://github.com/41cha/INTITA-Basic-Programing/blob/main/images/Figure_for_cap128.png?raw=true" alt="start_capacity = 128" width="300">
