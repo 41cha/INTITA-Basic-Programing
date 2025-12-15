@@ -22,7 +22,7 @@ Dynamic стратегія найбільш економна по пам’ят�
 ## Візуалізація результатів
 
 ### Швидкість для різних growth_type (start_capacity = 8)
-![Швидкість для різних growth_type, start_capacity = 8](TESTS/Figure_for_cap8.png)
+![Швидкість для різних growth_type, start_capacity = 8](https://github.com/41cha/INTITA-Basic-Programing/blob/main/TESTS/Figure_for_cap128.png)
 
 ### Швидкість для різних growth_type (start_capacity = 32)
 ![Швидкість для різних growth_type, start_capacity = 32](TESTS/Figure_for_cap32.png)
