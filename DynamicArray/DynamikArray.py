@@ -1,11 +1,11 @@
 import ctypes
 import math
-import time
 import matplotlib.pyplot as plt
 
 
 class DynamicArray:
     def __init__(self, start_capacity=8, growth_type="double"):
+
         self.capacity = start_capacity
         self.length = 0
         self.data = (self.capacity * ctypes.py_object)()
@@ -17,6 +17,7 @@ class DynamicArray:
             self.resize()
 
         self.data[self.length] = value
+        
         self.length += 1
 
     def resize(self):
@@ -47,12 +48,14 @@ class DynamicArray:
         self.resize_count += 1
 
     def get(self, index):
+
         if index < 0 or index >= self.length:
             raise IndexError("out of range")
         
         return self.data[index]
 
     def set(self, index, value):
+
         if index < 0 or index >= self.length:
             raise IndexError("out of range")
         
@@ -62,6 +65,7 @@ class DynamicArray:
         return self.length
 
     def print_all(self):
+
         for i in range(self.length):
             print(self.data[i], end=' -> ')
 
@@ -70,36 +74,34 @@ class DynamicArray:
     def unused(self):
         return self.capacity - self.length
 
+
 growth_types = ["double", "fixed", "dynamic"]
-sizes = [100, 1000, 5000, 10000, 50000, 100000]
-results = {gt: [] for gt in growth_types}
-
-for growth_type in growth_types:
-    times = []
-    for num in sizes:
-        arr = DynamicArray(8, growth_type=growth_type)
-        t0 = time.time()
-
-        for i in range(num):
-            arr.append(i)
-
-        t1 = time.time()
-        times.append((t1 - t0) * 1000)  # в мілісекунди
-
-    results[growth_type] = times
+max_size = 100000
 
 plt.figure(figsize=(10, 6))
 
 for growth_type in growth_types:
-    plt.plot(sizes, results[growth_type], marker='o', label=growth_type, linewidth=2)
+    arr = DynamicArray(128, growth_type=growth_type)
+    
+    lengths = []
+    unused_spaces = []
+    
+    for i in range(max_size):
+        arr.append(i)
+        
+        if (i + 1) % 1000 == 0:
+            lengths.append(arr.length)
+            unused_spaces.append(arr.unused())
+    
+    plt.plot(lengths, unused_spaces, marker='o', label=growth_type, linewidth=2, markersize=3)
+
 
 plt.xlabel('Кількість елементів')
-plt.ylabel('Час додавання (мс)')
-plt.title('Порівняння швидкості DynamicArray для різних growth_type')
+plt.ylabel('Невикористане місце')
+plt.title('Залежність невикористаного місця від кількості елементів')
+
 plt.legend()
 
 plt.grid(True, alpha=0.3)
-plt.yscale('log') 
-plt.xticks(sizes)
 plt.tight_layout()
 plt.show()
